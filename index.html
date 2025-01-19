@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Selamat Ulang Tahun</title>
+  <style>
+    body {
+      background-image: linear-gradient(#6495ED, #87CEEB);
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      text-align: center;
+      padding-top: 20vh;
+    }
+    h1, p {
+      font-size: 40px;
+      color: #FFFFFF;
+      text-shadow: 0 0 10px #007BFF;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #tengah {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="judul"></h1>
+    <p id="pesan"></p>
+    <button id="tombol" style="display: none;" onclick="hapusTeks()">Hapus</button>
+    <div id="tengah" style="display:none; text-align:center;">
+      <audio id="musik" controls style="display:none;"></audio>
+      <button id="play-musik" onclick="playMusik()">Play Musik</button>
+    </div>
+    <p id="lagu" style="display: none; font-size: 30px;"></p>
+  </div>
+
+  <script>
+    const judul = "Selamat Ulang Tahun Siti nurul aini!";
+    const pesan = "Semoga hari ini menjadi hari yang bahagia dan menyenangkan bagi Aini!";
+    const tombol = document.getElementById("tombol");
+    let i = 0;
+    let j = 0;
+    let k = 0;
+    const lirik = "pencet tombol di atas untuk memulai lagu";
+    const linkMusik = "https://example.com/musik_ulang_tahun.mp3";
+
+    const ketikJudul = setInterval(() => {
+      document.getElementById("judul").innerHTML += judul[i];
+      i++;
+      if (i >= judul.length) {
+        clearInterval(ketikJudul);
+        setTimeout(ketikPesan, 500);
+      }
+    }, 100);
+
+    const ketikPesan = () => {
+      const pesanElement = document.getElementById("pesan");
+      const interval = setInterval(() => {
+        pesanElement.innerHTML += pesan[j];
+        j++;
+        if (j >= pesan.length) {
+          clearInterval(interval);
+          setTimeout(() => {
+            tombol.style.display = "block";
+          }, 500);
+        }
+      }, 100);
+    };
+
+    function hapusTeks() {
+      document.getElementById("judul").innerHTML = "";
+      document.getElementById("pesan").innerHTML = "";
+      tombol.style.display = "none";
+      document.getElementById("tengah").style.display = "block";
+      setTimeout(ketikLagu, 1000);
+    }
+
+    function ketikLagu() {
+      const laguElement = document.getElementById("lagu");
+      laguElement.style.display = "block";
+      const interval = setInterval(() => {
+        laguElement.innerHTML += lirik[k];
+        k++;
+        if (k >= lirik.length) {
+          clearInterval(interval);
+        }
+      }, 100);
+    }
+
+    function playMusik() {
+      const musik = document.getElementById("musik");
+      musik.src = linkMusik;
+      musik.type = "audio/mp3";
+      musik.controls = true;
+      musik.style.display = "block";
+    }
+  </script>
+</body>
+</html>
